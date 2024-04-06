@@ -28,10 +28,6 @@
 
 ### 特别鸣谢
 
-@misc{Label,
-    author= {{Author's name}},
-    year  = {2017},
-    title = {Title, {Subtitle}},
-    note  = {\url{http://www.address_of_you_wannar_cite/}, 
-             Last accessed on 2019-12-25},
-}
+- [EmoLLM](https://github.com/SmartFlowAI/EmoLLM)
+- [上海人工智能实验室](https://www.shlab.org.cn/)
+- [闻星大佬（小助手）](https://github.com/vansin)
