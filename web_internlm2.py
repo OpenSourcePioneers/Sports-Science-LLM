@@ -24,9 +24,12 @@ from openxlab.model import download
 
 logger = logging.get_logger(__name__)
 
-download(model_repo='leonliuzx/Sports_Science_LLM_Fitness_Trainer', 
-        output='model')
-
+base_path = './model'
+# download repo to the base_path directory using git
+os.system('apt install git')
+os.system('apt install git-lfs')
+os.system(f'git clone https://code.openxlab.org.cn/leonliuzx/Sports_Science_LLM_Fitness_Trainer.git {base_path}')
+os.system(f'cd {base_path} && git lfs pull')
 @dataclass
 class GenerationConfig:
     # this config is used for chat to provide more diversity
