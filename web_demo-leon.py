@@ -24,7 +24,7 @@ from openxlab.model import download
 
 logger = logging.get_logger(__name__)
 
-download(model_repo='leonliuzx/Sports-Science-LLM-Fitness-Trainer', 
+download(model_repo='leonliuzx/Sports_Science_LLM_Fitness_Trainer', 
         output='model')
 
 @dataclass
