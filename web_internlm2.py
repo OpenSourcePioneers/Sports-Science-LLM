@@ -24,7 +24,7 @@ from openxlab.model import download
 
 logger = logging.get_logger(__name__)
 
-download(model_repo='leonliuzx/Sports-Science-LLM-Fitness-Trainer', 
+download(model_repo='leonliuzx/Sports_Science_LLM_Fitness_Trainer', 
         output='model')
 
 @dataclass
@@ -189,7 +189,7 @@ cur_query_prompt = "<|im_start|>user\n{user}<|im_end|>\n<|im_start|>assistant\n"
 def combine_history(prompt):
     messages = st.session_state.messages
     meta_instruction = (
-        "你是一个由leonliuzx研发（排名按字母顺序排序，不分先后）、上海人工智能实验室提供支持开发的心理健康大模型。现在你是一个健身专家，我有一些健身和营养问题，请你用专业的知识帮我解决。"
+        "你是一个拥有丰富健身知识和营养知识的幽默风趣健身教练，我有一些健身和营养问题，你平时是一个阳光富有激情的教练，请你用专业的知识帮我解决问题，偶尔用文学故事中的人物故事代指来教导和鼓励我。\n"
     )
     total_prompt = f"<s><|im_start|>system\n{meta_instruction}<|im_end|>\n"
     for message in messages:
@@ -214,7 +214,7 @@ def main():
     user_avator = "assets/user.png"
     robot_avator = "assets/robot.jpeg"
 
-    st.title("EmoLLM")
+    st.title("Sports-Science-LLM-Fitness-Trainer")
 
     generation_config = prepare_generation_config()
 
