@@ -21,8 +21,6 @@ from transformers.utils import logging
 
 from transformers import AutoTokenizer, AutoModelForCausalLM  # isort: skip
 from openxlab.model import download
-
-import torch
 import os
 
 logger = logging.get_logger(__name__)
@@ -178,7 +176,7 @@ def load_model():
 def prepare_generation_config():
     with st.sidebar:
         # 使用 Streamlit 的 markdown 函数添加 Markdown 文本
-        st.image('', width=1, caption=' Logo', use_column_width=True)
+        st.image('assets/Sports-Science-LLM_logo.jpg', width=1, caption='Sports-Science-LLM AI Logo', use_column_width=True)
         st.markdown("[访问 Sports-Science-LLM 官方repo](https://github.com/OpenSourcePioneers/Sports-Science-LLM)")
 
         max_length = st.slider("Max Length", min_value=8, max_value=32768, value=32768)
@@ -216,7 +214,7 @@ def combine_history(prompt):
 
 
 def main():
-    st.markdown("准备好一起运动了嘛,唐吉可德", unsafe_allow_html=True)
+    st.markdown("准备好一起运动了嘛,唐吉可德骑士!", unsafe_allow_html=True)
     
     # torch.cuda.empty_cache()
     print("load model begin.")
