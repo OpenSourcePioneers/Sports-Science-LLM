@@ -19,13 +19,16 @@ from torch import nn
 from transformers.generation.utils import LogitsProcessorList, StoppingCriteriaList
 from transformers.utils import logging
 
-from transformers import AutoTokenizer, AutoModelForCausalLM  # isort: skip
+from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModel  # isort: skip
 from openxlab.model import download
+import os
 
 logger = logging.get_logger(__name__)
 
-download(model_repo='leonliuzx/Sports-Science-LLM-Fitness-Trainer', 
-        output='model')
+base_path = './Sports_Science_LLM_Fitness_Trainer'
+os.system(f'git clone https://code.openxlab.org.cn/leonliuzx/Sports_Science_LLM_Fitness_Trainer.git {base_path}')
+os.system(f'cd {base_path} && git lfs pull')
+
 
 @dataclass
 class GenerationConfig:
@@ -160,19 +163,15 @@ def on_btn_click():
 
 @st.cache_resource
 def load_model():
-    model = (
-        AutoModelForCausalLM.from_pretrained("model", trust_remote_code=True)
-        .to(torch.bfloat16)
-        .cuda()
-    )
-    tokenizer = AutoTokenizer.from_pretrained("model", trust_remote_code=True)
+    model = AutoModelForCausalLM.from_pretrained(base_path,trust_remote_code=True, torch_dtype=torch.float16).cuda()
+    tokenizer = AutoTokenizer.from_pretrained(base_path,trust_remote_code=True)
     return model, tokenizer
 
 
 def prepare_generation_config():
     with st.sidebar:
         # 使用 Streamlit 的 markdown 函数添加 Markdown 文本
-        st.image('', width=1, caption=' Logo', use_column_width=True)
+        st.image('assets/Sports-Science-LLM_logo.jpg', width=1, caption='Sports-Science-LLM AI Logo', use_column_width=True)
         st.markdown("[访问 Sports-Science-LLM 官方repo](https://github.com/OpenSourcePioneers/Sports-Science-LLM)")
 
         max_length = st.slider("Max Length", min_value=8, max_value=32768, value=32768)
@@ -210,7 +209,7 @@ def combine_history(prompt):
 
 
 def main():
-    st.markdown("准备好一起运动了嘛,唐吉可德", unsafe_allow_html=True)
+    st.markdown("准备好一起运动了嘛,唐吉可德骑士!", unsafe_allow_html=True)
     
     # torch.cuda.empty_cache()
     print("load model begin.")
