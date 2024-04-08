@@ -25,7 +25,7 @@ import os
 
 logger = logging.get_logger(__name__)
 
-base_path = './Sports_Science_LLM_Fitness_Trainer'
+base_path = '/home/xlab-app-center/model'
 os.system(f'git clone https://code.openxlab.org.cn/leonliuzx/Sports_Science_LLM_Fitness_Trainer.git {base_path}')
 os.system(f'cd {base_path} && git lfs pull')
 
