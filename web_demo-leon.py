@@ -19,17 +19,18 @@ from torch import nn
 from transformers.generation.utils import LogitsProcessorList, StoppingCriteriaList
 from transformers.utils import logging
 
-from transformers import AutoTokenizer, AutoModelForCausalLM  # isort: skip
+from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModel  # isort: skip
 from openxlab.model import download
 import os
 
 logger = logging.get_logger(__name__)
 
-base_path = './model'
+base_path = './Sports_Science_LLM_Fitness_Trainer'
 os.system('apt install git')
 os.system('apt install git-lfs')
 os.system(f'git clone https://code.openxlab.org.cn/leonliuzx/Sports_Science_LLM_Fitness_Trainer.git {base_path}')
 os.system(f'cd {base_path} && git lfs pull')
+
 
 @dataclass
 class GenerationConfig:
@@ -164,12 +165,8 @@ def on_btn_click():
 
 @st.cache_resource
 def load_model():
-    model = (
-        AutoModelForCausalLM.from_pretrained("model", trust_remote_code=True)
-        .to(torch.bfloat16)
-        .cuda()
-    )
-    tokenizer = AutoTokenizer.from_pretrained("model", trust_remote_code=True)
+    model = AutoModelForCausalLM.from_pretrained(base_path,trust_remote_code=True, torch_dtype=torch.float16).cuda()
+    tokenizer = AutoTokenizer.from_pretrained(base_path,trust_remote_code=True)
     return model, tokenizer
 
 
